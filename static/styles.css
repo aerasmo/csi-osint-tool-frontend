@@ -1,0 +1,54 @@
+* {
+  text-align: center;
+}
+.main {
+  margin: 2rem 3rem;
+}
+
+th {
+  background-color: grey;
+  color: black;
+}
+.card a {
+  color: gray;
+}
+.card .btn {
+  color: #fefefe;
+}
+
+.card {
+  margin-bottom: 1.5rem;
+}
+.image-area img {
+  width: auto;
+  /* max-height: 50%; */
+  max-height: 40rem;
+  max-width: 40rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.image-area-collapse img {
+  width: auto;
+  /* max-height: 50%; */
+  max-width: 30rem;
+}
+
+.custom-file {
+  display: flex;
+}
+.filters {
+  padding: 1rem 1.5rem;
+  display: inline-flex;
+  width: 100%;
+}
+.filters > div {
+  /* padding: 0.5rem; */
+  margin: 0 0.25rem;
+}
+.btn-group {
+  margin: 0 auto;
+}
+.btn-group .btn {
+  margin: 1rem;
+}

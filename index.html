@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/bootstrap.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Online Crime Scene OSINT tool</title>
+  </head>
+  <body>
+    <!-- {% If process complete %}-->
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Sucess!</h4>
+      Image processing complete
+    </div>
+    <!-- {% endif %} -->
+
+    <div class="main">
+      <h3 class="display-5">
+        Open-source Image Analysis Tool for Object Identification and Distance
+        Estimation for Crime Scene Investigation
+      </h3>
+      <br />
+      <p class="m-5">
+        The web-page (front-end) will send your image to the cloud server. The
+        algorithm then performs object detections and other functions which will
+        be provided for the user to view (back-end). The output generated will
+        be viewed on the web-page and the image result can be downloaded as well
+        as the data.
+      </p>
+      <p class="m-5">
+        The project can be used as an Open Source Intelligence (OSINT) tool. It
+        will be useful in the field of Forensics, specifically in Crime Scene
+        Examination. The application can be used by forensic scientists that
+        seek and extract comprehensive information about the image of the crime
+        scene, particularly in indoor crime scenes.
+      </p>
+      <hr />
+      <!-- -->
+
+
+      <!-- loop -->
+      <!-- collapse -->
+      <div>
+        <h2>UPLOAD IMAGE HERE</h2>
+        <br />
+
+        <form
+          action="/"
+          method="POST"
+          enctype="multipart/form-data d-inline-block"
+        >
+          <!-- <input type="image" src="" alt=""> -->
+
+          <!-- <label for="x_scale"> X scale: </label>
+            <input type="number" name="x_scale" id="x_scale" step='0.01' placeholder='2.00'>
+            <label for="y_scale"> Y scale: </label>
+            <input type="number" name="y_scale" id="y_scale" step='0.01' placeholder='2.00'> -->
+          <!-- filter -->
+          <div class="filters">
+            <div class="custom-file">
+                <input
+                  oninput="filesize(this);"
+                  type="file"
+                  id="image-input"
+                  name="image"
+                  accept="image/gif, image/jpeg, image/png"
+                />
+    
+                <label class="custom-file-label text-left" for="image-input">
+                  Choose file
+                </label>
+            </div>
+      
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Filter Only</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="cat"
+              />
+            </div>
+
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Filter Without</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                  placeholder="dog"
+
+                />
+            </div>
+
+          </div>
+
+          <!--  features -->
+          <div>
+            <input type="checkbox" name="show-distance" id="show-distance" />
+            <label class="mr-3" for="show-distance">Show Distance</label>
+
+            <input type="checkbox" name="show-count" id="show-count" />
+            <label for="show-count">Show Object Count</label>
+          </div>
+
+          <div class="mt-2 d-inline-block">
+            <input class="btn btn-secondary" type="submit" value="Submit" />
+          </div>
+        </form>
+      </div>
+
+      <hr />
+      <!-- --- -->
+
+      <main>
+        <h3>Uploaded Image:</h3>
+        <!-- <h5>sample.png</h5> -->
+
+        <div class="image-area">
+          <!-- <img src="/static/images/sample.png" alt="" /> -->
+          <img id="output" alt="">
+        </div> 
+        <!-- {% if file %} -->
+        <!-- <img src="/static/uploads/{{uploaded}}" alt=""> -->
+        <!-- <img src="/static/output/{{output}}" alt="" /> -->
+        <!-- {% else %} -->
+        <!-- <img src="./not-found.png" /> -->
+        <!-- {% endif %} -->
+      </main>
+      <!-- --- -->
+
+      <div id="accordion" role="tablist">
+          <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+              <h5 class="mb-0">
+                <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  sample.png
+                </a>
+              </h5>
+            </div>
+        
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              <div class="card-body">
+                <!-- Image View -->
+                <div class="image-area-collapse">
+                    <img src="/static/images/sample.png" alt="" />
+                </div>
+          
+                <!-- Information -->
+                <hr>
+                <h3>Image Information:</h3>
+                <br />
+
+                <!-- Object Count -->
+                <h4 class="text-left">Object Count</h4>
+                <div>
+                  <table class="table table-bordered table-hover" style="width: 100%;">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Classified Objects</th>
+                        <th>Count</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>cat</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <td>dog</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <br />
+
+                <!-- Object Distance -->
+                <h4 class="text-left">Object Distance</h4>
+                <div>
+                  <table class="table table-bordered table-hover" style="width: 100%;">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Object Distance Matrix</th>
+                        <th>cat</th>
+                        <th>dog</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>cat</td>
+                        <td>-</td>
+                        <td>2.08m</td>
+                      </tr>
+                      <tr>
+                        <td>dog</td>
+                        <td>1.35m</td>
+                        <td>-</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            <div class="btn-group">
+                <a class="btn btn-dark" href="#">
+                  Download image
+              </a>
+              <!-- {% if file %} -->
+              <a class="btn btn-dark" href="/download/{{output}}" target="_blank">
+                Download Objects as ZIP
+              </a>
+              <!-- {% endif %} -->
+              <a class="btn btn-danger" href="#">
+                Download data as CSV
+              </a>
+            </div>
+
+          </div>
+
+            </div>
+
+
+
+            <div class="card">
+              <div class="card-header" role="tab" id="headingTwo">
+                <h5 class="mb-0">
+                  <a class="collapsed text-decoration-none" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    sample2.png
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                </div>
+              </div>
+            </div>
+      </div>
+      
+      
+      <!-- {% block script %} -->
+
+    <script>
+      function filesize(elem) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+        }
+        document.cookie = `filesize=${elem.files[0].size}`;
+      }
+    </script>
+
+    <!-- {% endblock %} -->
+  </body>
+</html>
